@@ -6,7 +6,7 @@ import Cart from '@/views/Cart'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   routes: [
     {
       path: '/',
@@ -17,6 +17,11 @@ export default new Router({
       path: '/cart',
       name: 'Cart',
       component: Cart
+    },
+    {
+      path: '/goods',
+      name: 'GoodsList',
+      component: GoodsList
     }
   ]
 })

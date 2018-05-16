@@ -1239,6 +1239,14 @@ html {
     width: 300px !important;
   }
 
+  .md-modal .login-wrap{
+    margin-top:0;
+  }
+
+  .md-modal .md-title{
+    left: 14px;
+  }
+
   .md-modal.md-modal-fun .md-content {
     padding-top: 30px;
   }

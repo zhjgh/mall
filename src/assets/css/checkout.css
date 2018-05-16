@@ -1322,7 +1322,7 @@ html {
 .cart-foot-wrap .cart-foot-l {
   float: left;
   padding: 0 22px;
-  line-height: 54px;
+  margin-top: 20px;
 }
 
 .cart-foot-wrap .item-all-check {
@@ -1366,12 +1366,16 @@ html {
   line-height: 54px;
 }
 
+.cart-foot-wrap .item-total span,
+.cart-foot-wrap .item-total a{
+  float: left;
+}
+
 .cart-foot-wrap .item-total .total-price {
-  margin-left: 6px;
+  margin: 0 20px 0 10px;
   color: #d1434a;
   font-size: 1.125em;
   font-weight: bold;
-  line-height: 1.2;
 }
 
 .cart-foot-wrap .cart-foot-checkout-promotions {
@@ -1613,7 +1617,6 @@ html {
 
   .cart-foot-wrap .cart-foot-l {
     font-size: 1.4rem;
-    line-height: 48px;
   }
 
   .cart-foot-wrap .item-all-check {
@@ -1637,10 +1640,7 @@ html {
   }
 
   .cart-foot-wrap .item-total .total-price {
-    display: block;
-    margin: 0;
     font-size: 1.6rem;
-    margin-top: 2px;
   }
 
   .cart-foot-wrap .cart-foot-checkout-promotions {
@@ -1706,10 +1706,6 @@ html {
 
   .order-foot-wrap .prev-btn-wrap {
     display: none;
-  }
-
-  .addr-list-wrap {
-    /*padding-bottom:23px;*/
   }
 
   .cart-blank-wrap .page-title-normal {

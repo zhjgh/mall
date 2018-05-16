@@ -67,75 +67,83 @@ router.get('/list', (req, res) => {
 
 // 加入购物车
 router.post('/addCart', (req, res) => {
-  let userId = '100000077'
+  let userId = req.cookies.userId
   let productId = req.body.productId
 
-  User.findOne({userId:userId}, (userErr, userDoc) => {
-    if (userErr) {
-      res.json({
-        status: '1',
-        message: userErr.message
-      })
-    }else{
-      if(userDoc){
-        let goodItem = ''
-        userDoc.cartList.forEach((item) => {
-          if(item.productId == productId){
-            goodItem = item
-            item.productNum++
-          }
+  if (userId){
+    User.findOne({
+      userId: userId
+    }, (userErr, userDoc) => {
+      if (userErr) {
+        res.json({
+          status: '1',
+          message: userErr.message
         })
-        if(goodItem){
-          userDoc.save((err, doc) => {
-            if (err) {
-              res.json({
-                status: '1',
-                message: err.message
-              })
-            } else {
-              res.json({
-                status: '0',
-                message: '',
-                result: 'suc'
-              })
+      } else {
+        if (userDoc) {
+          let goodItem = ''
+          userDoc.cartList.forEach((item) => {
+            if (item.productId == productId) {
+              goodItem = item
+              item.productNum++
             }
           })
-        }else{
-          Good.findOne({
-            productId: productId
-          }, (goodErr, goodDoc) => {
-            if (goodErr) {
-              res.json({
-                status: '1',
-                message: goodErr.message
-              })
-            } else {
-              if (goodDoc) {
-                goodDoc.productNum = 1
-                goodDoc.checked = 1
-                userDoc.cartList.push(goodDoc)
-                userDoc.save((err, doc) => {
-                  if (err) {
-                    res.json({
-                      status: '1',
-                      message: err.message
-                    })
-                  } else {
-                    res.json({
-                      status: '0',
-                      message: '',
-                      result: 'suc'
-                    })
-                  }
+          if (goodItem) {
+            userDoc.save((err, doc) => {
+              if (err) {
+                res.json({
+                  status: '1',
+                  message: err.message
+                })
+              } else {
+                res.json({
+                  status: '0',
+                  message: '',
+                  result: 'suc'
                 })
               }
-            }
-          })
-
+            })
+          } else {
+            Good.findOne({
+              productId: productId
+            }, (goodErr, goodDoc) => {
+              if (goodErr) {
+                res.json({
+                  status: '1',
+                  message: goodErr.message
+                })
+              } else {
+                if (goodDoc) {
+                  goodDoc.productNum = 1
+                  goodDoc.checked = 1
+                  userDoc.cartList.push(goodDoc)
+                  userDoc.save((err, doc) => {
+                    if (err) {
+                      res.json({
+                        status: '1',
+                        message: err.message
+                      })
+                    } else {
+                      res.json({
+                        status: '0',
+                        message: '',
+                        result: 'suc'
+                      })
+                    }
+                  })
+                }
+              }
+            })
+          }
         }
       }
-    }
-  })
+    })
+  }else{
+    res.json({
+      status: '1',
+      message: '未登录'
+    })
+  }
 })
 
 module.exports = router
